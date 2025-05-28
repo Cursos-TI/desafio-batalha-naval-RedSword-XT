@@ -4,11 +4,85 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
-int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+int main() { 
+
+        // Nível Novato - Posicionamento dos Navios
+
+    int tabuleiro[10][10]; // Tabuleiro de batalha naval
+    int navio_horizontal[3] = {3, 3, 3}; // Representa um navio de 3 partes na horizontal
+    int navio_vertical[3] = {3, 3, 3}; // Representa um navio de 3 partes na vertical
+
+    // Inicializa o tabuleiro com 0 (água)
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            tabuleiro[i][j] = 0;
+        }
+    }
+
+    // Coordenadas do navio horizontal
+    int linha_h = 2;
+    int coluna_h = 4;
+
+    // Verifica se cabe no tabuleiro
+    if (coluna_h + 3 <= 10) {
+        // Verifica sobreposição
+        int pode_colocar = 1;
+        for (int i = 0; i < 3; i++) {
+            if (tabuleiro[linha_h][coluna_h + i] != 0) {
+                pode_colocar = 0;
+                break;
+            }
+        }
+        // Posiciona
+        if (pode_colocar) {
+            for (int i = 0; i < 3; i++) {
+                tabuleiro[linha_h][coluna_h + i] = navio_horizontal[i];
+            }
+        } else {
+            printf("Erro: sobreposição ao posicionar navio horizontal.\n");
+        }
+    } else {
+        printf("Erro: navio horizontal fora do tabuleiro.\n");
+    }
+
+    // Coordenadas do navio vertical
+    int linha_v = 5;
+    int coluna_v = 7;
+
+    // Verifica se cabe no tabuleiro
+    if (linha_v + 3 <= 10) {
+        // Verifica sobreposição
+        int pode_colocar = 1;
+        for (int i = 0; i < 3; i++) {
+            if (tabuleiro[linha_v + i][coluna_v] != 0) {
+                pode_colocar = 0;
+                break;
+            }
+        }
+        // Posiciona
+        if (pode_colocar) {
+            for (int i = 0; i < 3; i++) {
+                tabuleiro[linha_v + i][coluna_v] = navio_vertical[i];
+            }
+        } else {
+            printf("Erro: sobreposição ao posicionar navio vertical.\n");
+        }
+    } else {
+        printf("Erro: navio vertical fora do tabuleiro.\n");
+    }
+
+    // Exibe o tabuleiro
+    printf("\n== BATALHA NAVAL ==\n");
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            printf("%d ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
@@ -36,5 +110,3 @@ int main() {
     // 1 1 1 1 1
     // 0 0 1 0 0
 
-    return 0;
-}
